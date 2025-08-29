@@ -61,49 +61,58 @@ http.createServer((req, res) => {
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     const welcomeMessage = `
-*🔗 Welcome to URL Shortener Bot!*
+🔗 Welcome to URL Shortener Bot!
 
-I help you *shorten URLs* instantly using the *Linkara.xyz API*.
+This bot helps you shorten URLs using Linkara.xyz API.
 
-✨ *Available Commands:*
-• */start* – Show this welcome message  
-• */api <your-api-key>* – Set your *Linkara.xyz API key*  
-• */balance* – Check your *account balance*  
-• */help* – Show help information  
+Available commands:
+/start - Show this welcome message
+/api <your-api-key> - Set your Linkara.xyz API key
+/balance - Check your account balance
+/help - Show help information
 
-🚀 *How to Get Started:*  
-1️⃣ Get your *API key* from [Linkara.xyz](https://linkara.xyz/member/tools/api)  
-2️⃣ Set it using */api command*  
-3️⃣ Send me any message with URLs – I’ll *shorten them automatically* 🎯  
+To get started:
+1. Get your API key from Linkara.xyz
+2. Set it using /api command
+3. Send any message with URLs and I'll shorten them for you!
 
-💡 _The bot keeps your original message structure while replacing URLs with shortened versions._
+The bot preserves your original message structure while replacing URLs with shortened versions.
     `;
-
-    bot.sendMessage(chatId, welcomeMessage, { parse_mode: "MarkdownV2" });
+    
+    bot.sendMessage(chatId, welcomeMessage);
 });
 
-
-// Command handlers
 bot.onText(/\/help/, (msg) => {
     const chatId = msg.chat.id;
     const helpMessage = `
-📚 *Help - URL Shortener Bot*
+📚 Help - URL Shortener Bot
 
-✨ *Commands:*
-• */start* – Welcome message and setup instructions  
-• */api <your-api-key>* – Set your *Linkara.xyz API key*  
-• */balance* – Check your *account balance*  
-• */help* – Show this help message  
+Commands:
+• /start - Welcome message and setup instructions
+• /api <key> - Set your Linkara.xyz API key
+• /balance - Check your account balance
+• /help - Show this help message
 
-⚙️ *Usage:*  
-1️⃣ Set your API key: \`/api your-api-key-here\`  
-2️⃣ Send any message containing URLs  
-3️⃣ Bot will reply with the same message but with *shortened URLs*  
+Usage:
+1. Set your API key: /api your-api-key-here
+2. Send any message containing URLs
+3. Bot will reply with the same message but URLs shortened
 
-🔑 Need an API key? Get it here 👉 [Linkara.xyz](https://linkara.xyz/member/tools/api)
+Features:
+✅ Single URL shortening
+✅ Bulk URL shortening (multiple URLs in one message)
+✅ Preserves original message format
+✅ Supports all URL types (HTTP, HTTPS, FTP, etc.)
+✅ Custom aliases support (if provided in URL)
+
+Example:
+You: "Check out https://example.com and https://google.com"
+Bot: "Check out https://linkara.xyz/xxxxx and https://linkara.xyz/yyyyy"
+
+Need an API key? Visit: https://linkara.xyz
     `;
-
-    bot.sendMessage(chatId, helpMessage, { parse_mode: "MarkdownV2" });
+    
+    bot.sendMessage(chatId, helpMessage);
 });
 
 bot.onText(/\/api (.+)/, async (msg, match) => {
