@@ -43,6 +43,20 @@ const bot = new TelegramBot(config.TELEGRAM_BOT_TOKEN, { polling: true });
         process.exit(1);
     }
 })();
+// --- Health check web server ---
+const express = require("express");
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+  res.send("✅ Telegram URL Shortener Bot is running");
+});
+
+app.listen(PORT, () => {
+  console.log(`🌍 Health check server listening on port ${PORT}`);
+});
+
 
 // Command handlers
 bot.onText(/\/start/, (msg) => {
